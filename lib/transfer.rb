@@ -12,22 +12,22 @@ attr_accessor  :sender, :receiver, :status, :amount
  end
 
   def valid?
-    if @sender.valid? && @receiver.valid?
-      true
-    else
-      false
-    end
+    sender.valid? && receiver.valid?
   end
 
   def execute_transaction
-    if valid? == true
-      @sender.balance -= @amount
-      @receiver.balance += @amount
-      @amount = 0
-      @status = "complete"
-    else
-      @status = "Transaction rejected. Please check your account balance."
+      if valid?
+        @sender.balance -= @amount
+        @receiver.balance += @amount
+        @amount = 0
+        @status = "complete"
+      elsif @sender.valid? == false
+        @status = "Transaction rejected. Please check your account balance."
+      end
     end
-  end
+
+    def reverse_transfer 
+    end
+
 
 end
